@@ -1,0 +1,32 @@
+<head>
+  <script defer type="text/javascript" src="/public/js/validation.js"></script>
+</head>
+{{> header }}
+<body>
+  <div id="wrapper">
+    <div class="main-content">
+      <div class="header">
+        <a href="/"><img src="/public/assets/logo.PNG" /></a>
+      </div>
+      <div class="loginInput">
+        <form action="javascript:validated()" name="registrationForm" onsubmit="return(validate());">
+          <input type="text" id="userNameInput" name="UserName" placeholder="Username" class="formInput"
+            onkeyup="checkUsername()" />
+          <input type="email" id="emailInput" name="EMail" placeholder="Email" class="formInput" />
+          <input type="text" id="passwordInput" name="Password" placeholder="Password" class="formInput"
+            onkeyup="checkPassword()" />
+          <input type="text" id="confirmPasswordInput" name="ConfirmPassword" placeholder="Re-Enter Password"
+            class="formInput" onkeyup="checkPasswords()" />
+
+          <input type="checkbox" id="cb1" required />
+          <label for="ageVerification" class="checkboxStyle">I'm 13+ years of age.</label><br />
+          <input type="checkbox" id="cb1" required />
+          <label for="confirmTos" class="checkboxStyle">I agree to the terms of use and privacy policy.</label><br />
+
+          <button type="submit" value="Submit" class="btn">Sign up</button>
+        </form>
+        <button type="submit" class="btn">Log in</button>
+      </div>
+    </div>
+  </div>
+</body>
