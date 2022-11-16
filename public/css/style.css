@@ -135,16 +135,16 @@ li {
 .fileName {
   width: 100%;
   margin-bottom: 5px;
-  margin-top: 5px;  
-} 
+  margin-top: 5px;
+}
 
-.commentBox{
+.commentBox {
   display: flex;
   justify-content: center;
 }
 
 .mainPosts {
-  display:flex;
+  display: flex;
   align-items: center;
   flex-direction: column;
   width: 100%;
@@ -299,8 +299,6 @@ li {
   padding: 6px 10px;
 }
 
-
-
 .searchButton {
   all: unset;
   cursor: pointer;
@@ -360,7 +358,8 @@ li {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   float: left;
 }
-.userPolicy{
+
+.userPolicy {
   float: left;
   margin-left: 5px;
   margin-bottom: 10px;
