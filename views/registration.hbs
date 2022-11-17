@@ -9,10 +9,10 @@
       <div class="loginInput">
         <form  
           name="registrationForm"
-          onsubmit="return validate();"
           method="POST"
           action="/users/register"
-          enctype="application/x-www-form-urlencoded">
+          enctype="application/x-www-form-urlencoded"
+          onsubmit="validate(event);">
           <input type="text" id="userNameInput" name="username" placeholder="Username" class="formInput"
             onkeyup="checkUsername()" />
           <input type="email" id="emailInput" name="email" placeholder="Email" class="formInput" />

@@ -16,35 +16,38 @@ var passwordVerfication =
 var blackBox = "2px solid black";
 var redBox = "2px solid red";
 
-const validate = () => {
-  console.log('here');
-  const userName = document.registrationForm.UserName.value;
-  const email = document.registrationForm.EMail.value;
-  const password = document.registrationForm.Password.value;
-  const confirmPassword = document.registrationForm.ConfirmPassword.value;
+const validate = (e) => {
+  const userName = document.registrationForm.username.value;
+  const email = document.registrationForm.email.value;
+  const password = document.registrationForm.password.value;
+  const confirmPassword = document.registrationForm.confirmPassword.value;
 
-  const userNameFocus = document.registrationForm.UserName.focus();
-  const emailFocus = document.registrationForm.EMail.focus();
-  const passwordFocus = document.registrationForm.Password.focus();
-  const confirmPasswordFocus = document.registrationForm.ConfirmPassword.focus();
+  const userNameFocus = document.registrationForm.username.focus();
+  const emailFocus = document.registrationForm.email.focus();
+  const passwordFocus = document.registrationForm.password.focus();
+  const confirmPasswordFocus = document.registrationForm.confirmPassword.focus();
 
   if (userName == "") {
+    e.preventDefault();
     alert("Username required");
     userNameFocus;
     return false;
   }
   if (!userName.match(userNameLetters)) {
+    e.preventDefault();
     alert("Make sure username starts with a letter A-Z");
     userNameFocus;
     return false;
   }
   if (!userName.match(userNameLength)) {
+    e.preventDefault();
     alert("Make sure username is 3 or more alphanumeric characters long");
     userNameFocus;
     return false;
   }
 
   if (email == "") {
+    e.preventDefault();
     alert("Email Required");
     emailStyle.outline = redBox;
     emailFocus;
@@ -54,11 +57,13 @@ const validate = () => {
   }
 
   if (password == "") {
+    e.preventDefault();
     alert("Password Required");
     passwordFocus;
     return false;
   }
   if (!password.match(passwordVerfication)) {
+    e.preventDefault();
     alert(
       "Make sure password is 8 alphanumeric characters long, contains at least one upper case letter, one number, and one of the following special characters: / * - + ! @ # $ ^ & ~ [ ]"
     );
@@ -67,12 +72,14 @@ const validate = () => {
   }
 
   if (confirmPassword == "") {
+    e.preventDefault();
     alert("Confirm password");
     confirmPasswordFocus;
     return false;
   }
 
   if (password != confirmPassword) {
+    e.preventDefault();
     alert("Make sure both passwords match exactly");
     confirmPasswordFocus;
     return false;
