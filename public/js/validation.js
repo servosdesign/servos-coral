@@ -17,6 +17,7 @@ var blackBox = "2px solid black";
 var redBox = "2px solid red";
 
 const validate = () => {
+  console.log('here');
   const userName = document.registrationForm.UserName.value;
   const email = document.registrationForm.EMail.value;
   const password = document.registrationForm.Password.value;

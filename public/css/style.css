@@ -299,6 +299,10 @@ li {
   padding: 6px 10px;
 }
 
+#__lpform_password_icon{
+  visibility: hidden;
+}
+
 .searchButton {
   all: unset;
   cursor: pointer;

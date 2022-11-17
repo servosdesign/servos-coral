@@ -1,9 +1,52 @@
 var express = require('express');
 var router = express.Router();
+const db = require('../conf/database');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.post("/register", function (req, res, next) {
+  const { username, email, password } = req.body;
+
+  // Server side validation 
+
+  // Checking for dupes
+  db.query('select id from users where username=?', [username])
+    .then(function ([results, fields]) {
+      if (results && results.length == 0) {
+        return db.query('select id from users where email=?', [email])
+      } else {
+        throw new Error('username already exists!');
+      }
+    }).then(function ([results, fields]) {
+      if (results && results.length == 0) {
+        return db.query('insert into users (username, email, password) value(?,?,?)', [username, email, password])
+      } else {
+        throw new Error('email already exists!');
+      }
+    }).then(function ([results, fields]) {
+      if (results && results.affectedRows) {
+        res.redirect('/login');
+      } else {
+        throw new Error('user could not be made')
+      }
+    }).catch(function (err) {
+      res.redirect('/registration');
+      next(err);
+    });
+});
+
+router.post("/login", function (req, res, next) {
+  const { username, password } = req.body;
+
+  db.query('select id, username, email from users where username=? and password=?', [username, password])
+    .then(function ([results, fields]) {
+      if (results && results.length == 1) {
+        res.redirect('/');
+      } else {
+        throw new Error('Invalid user credentials');
+      }
+    })
+    .catch(function (err) {
+      next(err);
+    })
 });
 
 module.exports = router;

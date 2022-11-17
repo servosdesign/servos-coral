@@ -4,11 +4,14 @@
     <div class="header">
       <img src="/public/assets/logo.PNG" />
     </div>
-    <div class="loginInput">
-      <input id="here" type="text" placeholder="Username" class="formInput" required />
-      <input id="here" type="password" placeholder="Password" class="formInput" required />
+    <form class="loginInput"
+    action="/users/login"
+    method="POST"
+    enctype="application/x-www-form-urlencoded">
+      <input id="username" type="text" placeholder="Username" name="username" class="formInput" required />
+      <input id="password" type="password" placeholder="Password" name="password" class="formInput" required />
       <button type="submit" class="btn">Log in</button>
-    </div>
+    </form>
   </div>
   <div class="signup">
     Don't have an account?
