@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const { isLoggedIn } = require('../middleware/protectors');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -10,12 +11,12 @@ router.get('/login', function (req, res) {
   res.render('login')
 });
 
-router.get('/postimage', function (req, res) {
+router.get('/postimage', isLoggedIn, function (req, res) {
   res.render('postimage')
 });
 
 router.get('/registration', function (req, res) {
-  res.render('registration', {js: ["validation.js"]})
+  res.render('registration', { js: ["validation.js"] })
 });
 
 router.get('/viewpost', function (req, res) {

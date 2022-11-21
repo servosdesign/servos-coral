@@ -1,12 +1,13 @@
-{{ log this }}
-
-
-
+  {{#if (nonEmptyObject messages)}}
+    {{> flashmessage}}
+  {{/if}}
+  
 <header>
   <div id="wrapperHome">
     <div class="home-content">
+
       <div class="header">
-        <a href="/"><img src="/public/assets/logo.PNG" /></a>
+        <a href="/"><img class="headerImage" src="/public/assets/logo.PNG" /></a>
       </div>
     </div>
     <div class="button-list">

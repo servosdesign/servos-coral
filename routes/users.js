@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt');
 const db = require('../conf/database');
+const userError = require('../helpers/error/UserError');
+const UserError = require('../helpers/error/UserError');
 
 router.post("/register", function (req, res, next) {
   const { username, email, password } = req.body;
@@ -46,20 +48,29 @@ router.post("/login", function (req, res, next) {
         let dbPassword = results[0].password;
         return bcrypt.compare(password, dbPassword);
       } else {
-        throw new Error('Invalid user credentials');
+        throw new UserError('Failed Login: Invalid user credentials', "/login", 200);
       }
     }).then(function (passwordsMatched) {
       if (passwordsMatched) {
         req.session.userId = loggedUserId;
         req.session.username = loggedUsername;
-        res.redirect('/');
+        req.flash("success", `Hi ${loggedUsername}, you are now logged in.`);
+        req.session.save(function (saveError) {
+          res.redirect('/');
+        });
       } else {
-        throw new Error('Invalid user credentials');
+        throw new UserError('Failed Login: Invalid user credentials', "/login", 200);
       }
-    })
-    .catch(function (err) {
-      next(err);
-    })
+    }).catch(function (err) {
+      if (err instanceof UserError) {
+        req.flash("error", err.getMessage());
+        req.session.save(function (saveError) {
+          res.redirect(err.getRedirectURL());
+        });
+      } else {
+        next(err);
+      }
+    });
 });
 
 router.post("/logout", function (req, res, next) {

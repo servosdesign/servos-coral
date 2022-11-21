@@ -1,0 +1,12 @@
+<div id="flash-message">
+  {{#if messages.error}}
+    <div class="alert-danger" id="alertFadeDanger">{{messages.error}}</div>
+  {{else}}
+    <div class="alert-success" id="alertFadeSuccess">{{messages.success}}</div>
+  {{/if}}
+</div>
+
+<script>
+  window.setTimeout("document.getElementById('alertFadeDanger').style.display='none';", 2000); 
+    window.setTimeout("document.getElementById('alertFadeSuccess').style.display='none';", 2000); 
+</script>
