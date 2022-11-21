@@ -1,13 +1,11 @@
 var express = require('express');
 var router = express.Router();
+const bcrypt = require('bcrypt');
 const db = require('../conf/database');
 
 router.post("/register", function (req, res, next) {
   const { username, email, password } = req.body;
 
-  // Server side validation 
-
-  // Checking for dupes
   db.query('select id from users where username=?', [username])
     .then(function ([results, fields]) {
       if (results && results.length == 0) {
@@ -17,10 +15,12 @@ router.post("/register", function (req, res, next) {
       }
     }).then(function ([results, fields]) {
       if (results && results.length == 0) {
-        return db.query('insert into users (username, email, password) value(?,?,?)', [username, email, password])
+        return bcrypt.hash(password, 2);
       } else {
         throw new Error('email already exists!');
       }
+    }).then(function (hashedPassword) {
+      return db.query('insert into users (username, email, password) value(?,?,?)', [username, email, hashedPassword])
     }).then(function ([results, fields]) {
       if (results && results.affectedRows) {
         res.redirect('/login');
@@ -35,10 +35,23 @@ router.post("/register", function (req, res, next) {
 
 router.post("/login", function (req, res, next) {
   const { username, password } = req.body;
+  let loggedUserId;
+  let loggedUsername;
 
-  db.query('select id, username, email from users where username=? and password=?', [username, password])
+  db.query('select id, username, password from users where username=?', [username])
     .then(function ([results, fields]) {
       if (results && results.length == 1) {
+        loggedUserId = results[0].id;
+        loggedUsername = results[0].username;
+        let dbPassword = results[0].password;
+        return bcrypt.compare(password, dbPassword);
+      } else {
+        throw new Error('Invalid user credentials');
+      }
+    }).then(function (passwordsMatched) {
+      if (passwordsMatched) {
+        req.session.userId = loggedUserId;
+        req.session.username = loggedUsername;
         res.redirect('/');
       } else {
         throw new Error('Invalid user credentials');
