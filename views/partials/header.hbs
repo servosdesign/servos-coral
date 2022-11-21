@@ -1,5 +1,7 @@
 {{ log this }}
 
+
+
 <header>
   <div id="wrapperHome">
     <div class="home-content">
@@ -8,7 +10,13 @@
       </div>
     </div>
     <div class="button-list">
+
+{{#if isLoggedIn}}
+      <a id="logout-btn"><button class="homeBtns">Log Out</button></a>
+{{else}}
       <a href="login"><button class="homeBtns">Log in</button></a>
+{{/if}}      
+      
       <a href="registration"><button class="homeBtns">Sign up</button></a>
       <a href="viewpost"><button class="homeBtns">View Post</button></a>
       <a href="postimage"> <button class="homeBtns">Post Image</button></a>
@@ -23,7 +31,19 @@
           </svg></button>
       </form>
     </div>
-
   </div>
-
 </header>
+{{#if isLoggedIn}}
+  <script>
+    document.getElementById('logout-btn').addEventListener('click', function(ev) {
+      fetch('/users/logout', {method: "POST"})
+        .then(response => response.json())
+        .then(function(res_json){
+          console.log(res_json);
+          window.location.replace('/');
+        }).catch (err => {
+          console.log(err);
+        })
+    });
+  </script>
+{{/if}}
