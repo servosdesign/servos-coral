@@ -5,6 +5,13 @@
     <h2 clas="titleHeader" id="counter"></h2>
 </div>
 <div id="imageContent">
-    <h2 id="imageTitle"></h2>
+    {{#each results}}
+        <div>
+            <img src="{{this.thumbnail}}" alt="">
+            <p>{{this.title}}</p>
+            <p>{{this.description}}</p>
+            <a href="/posts/{{this.id}}">Details</a>
+        </div>
+    {{/each}}
 </div>
 

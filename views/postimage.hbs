@@ -2,10 +2,12 @@
 <div class="post">
     <h1> Post Image</h1>
     <div class="main-content">
-        <form action="">
-            <input type="text" placeholder="Post Title" class="postTitle" required />
-            <input type="text" placeholder="Post Description" class="postDescription" required />
-            <input type="file" id="myFile" class="fileName" required>
+        <form action="/posts/create"
+        method="post"
+        enctype="multipart/form-data">
+            <input type="text" placeholder="Post Title" class="postTitle" name="title" required />
+            <input type="text" placeholder="Post Description" class="postDescription" name="description" required />
+            <input type="file" id="myFile" class="fileName" required name="uploadImage">
             <label for="User Agreement" class="user">User Agreement</label>
             <input type="checkbox" placeholder="Accept Use Policy" class="userPolicy" required />
             <button type="submit" class="btn">Post</button>
