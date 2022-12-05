@@ -141,6 +141,7 @@ li {
 .commentBox {
   display: flex;
   justify-content: center;
+  padding-left: 12px;
 }
 
 .mainPosts {
@@ -151,24 +152,19 @@ li {
   width: 100%;
   height: 40%;
 }
-.mainPosts h1{
+
+.mainPosts h1 {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow';
 }
 
-.bottomMainPosts {
-  display: flex;
-  margin: auto;
-  align-items: left;
-  flex-direction: column;
-  position: relative;
-  margin: auto;
-  left: 495px;
-  padding-bottom: 10px;
-}
-
-.bottomMainPosts p{
+.mainPosts p {
+  margin-right: 190px;
   padding-bottom: 10px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow';
+}
+
+.mainPostsContent {
+  text-align: left;
 }
 
 .home-content {
