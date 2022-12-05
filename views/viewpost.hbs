@@ -1,8 +1,13 @@
 {{> header }}
 <div class="mainPosts">
-    <h1 class="title"> Title Here</h1>
-    <img class="resize" src="/public/assets/vladimir-motsar-2 (1).jpg" alt="s">
-    </div>
+    <h1 class="title">{{currentPost.title}}</h1>
+    <img class="resize" src="/{{currentPost.image}}" alt="">
+</div>
+<div class="bottomMainPosts"
+    <p class="post-description">{{currentPost.description}}</p>
+    <p class="author">{{currentPost.username}}</p>
+    <p class="date-posted">{{formateDate currentPost.createdAt}}</p>
+</div>
     <div class="commentBox">
     <textarea cols="52" rows="1"></textarea>
     <button class="homeBtns">Comment</button>
