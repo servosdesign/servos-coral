@@ -1,35 +1,26 @@
-
 {{> header }}
-
-  <div id="wrapper">
-    <div class="main-content">
-      <div class="header">
-        <a href="/"><img src="/public/assets/logo.PNG" /></a>
-      </div>
-      <div class="loginInput">
-        <form  
-          name="registrationForm"
-          method="POST"
-          action="/users/register"
-          enctype="application/x-www-form-urlencoded"
-          onsubmit="validate(event);">
-          <input type="text" id="userNameInput" name="username" placeholder="Username" class="formInput"
-            onkeyup="checkUsername()" />
-          <input type="email" id="emailInput" name="email" placeholder="Email" class="formInput" />
-          <input type="text" id="passwordInput" name="password" placeholder="Password" class="formInput"
-            onkeyup="checkPassword()" />
-          <input type="text" id="confirmPasswordInput" name="confirmPassword" placeholder="Re-Enter Password"
-            class="formInput" onkeyup="checkPasswords()" />
-
-          <input type="checkbox" id="cb1" required />
-          <label for="ageVerification" class="checkboxStyle">I'm 13+ years of age.</label><br />
-          <input type="checkbox" id="cb1" required />
-          <label for="confirmTos" class="checkboxStyle">I agree to the terms of use and privacy policy.</label><br />
-
-          <button type="submit" value="Submit" class="btn">Sign up</button>
-        </form>
-        <a href="login"><button type="submit" class="btn">Log in</button></a>
-      </div>
+<div id="wrapper">
+  <div class="main-content">
+    <div class="header">
+      <a href="/"><img src="/public/assets/logo.PNG" /></a>
+    </div>
+    <div class="loginInput">
+      <form name="registrationForm" method="POST" action="/users/register" enctype="application/x-www-form-urlencoded"
+        onsubmit="validate(event);">
+        <input type="text" id="userNameInput" name="username" placeholder="Username" class="formInput"
+          onkeyup="checkUsername()" />
+        <input type="email" id="emailInput" name="email" placeholder="Email" class="formInput" />
+        <input type="text" id="passwordInput" name="password" placeholder="Password" class="formInput"
+          onkeyup="checkPassword()" />
+        <input type="text" id="confirmPasswordInput" name="confirmPassword" placeholder="Re-Enter Password"
+          class="formInput" onkeyup="checkPasswords()" />
+        <input type="checkbox" id="cb1" required />
+        <label for="ageVerification" class="checkboxStyle">I'm 13+ years of age.</label><br />
+        <input type="checkbox" id="cb1" required />
+        <label for="confirmTos" class="checkboxStyle">I agree to the terms of use and privacy policy.</label><br />
+        <button type="submit" value="Submit" class="btn">Sign up</button>
+      </form>
+      <a href="login"><button type="submit" class="btn">Log in</button></a>
     </div>
   </div>
-
+</div>

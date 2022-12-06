@@ -4,16 +4,14 @@
     <h1 class="titleHeader"></h1>
     <h2 clas="titleHeader" id="counter"></h2>
 </div>
-
-    {{#each results}}
-    <div class="mainPosts">
-        <div class="imageSizer">
-        <a href="/posts/{{this.id}}"><img src="{{this.thumbnail}}" alt=""></a>
-        </div>
-        <p class="titleText">{{this.title}}</p>
-        <p>{{this.description}}</p>
-        <a class="clickView" href="/posts/{{this.id}}"><button class="homeBtns">View Post</button></a>
+{{#each results}}
+<div class="mainPosts">
+    <div class="imageSizer">
+        <a href="/posts/{{this.id}}"><img src="/{{this.thumbnail}}" alt=""></a>
     </div>
-
+    <p class="titleText">{{this.title}}</p>
+    <p>{{this.description}}</p>
+    <a class="clickView" href="/posts/{{this.id}}"><button class="homeBtns">View Post</button></a>
+</div>
 {{/each}}
 </div>

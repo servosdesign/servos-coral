@@ -45,4 +45,22 @@ router.post("/create", upload.single("uploadImage"), function (req, res, next) {
     }).catch(err => next(err));
 });
 
+//localhost:3000/posts/search
+router.get("/search", function (req, res, next) {
+  let searchTerm = `%${req.query.searchTerm}%`;
+  let originalSearchTerm = req.query.searchTerm;
+  let baseSQL = `select 
+  id, title, description, thumbnail, concat_ws(" ", title, description) as haystack from posts
+  HAVING haystack like ?;`;
+  console.log(baseSQL);
+  db.execute(baseSQL, [searchTerm])
+    .then(function ([results, fields]) {
+      res.locals.results = results;
+      req.flash("success", `${results.length} results found`);
+      req.session.save(function (saveErr) {
+        res.render('index');
+      })
+    }).catch(err => next(err));
+});
+
 module.exports = router;

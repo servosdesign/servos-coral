@@ -1,7 +1,7 @@
-  {{#if (nonEmptyObject messages)}}
-    {{> flashmessage}}
-  {{/if}}
-  
+{{#if (nonEmptyObject messages)}}
+{{> flashmessage}}
+{{/if}}
+
 <header>
   <div id="wrapperHome">
     <div class="home-content">
@@ -11,40 +11,42 @@
       </div>
     </div>
     <div class="button-list">
-
-{{#if isLoggedIn}}
+      {{#if isLoggedIn}}
       <a id="logout-btn"><button class="homeBtns">Log Out</button></a>
-{{else}}
+      {{else}}
       <a href="login"><button class="homeBtns">Log in</button></a>
-{{/if}}      
-      
+      {{/if}}
+
       <a href="registration"><button class="homeBtns">Sign up</button></a>
       <a href="viewpost"><button class="homeBtns">View Post</button></a>
       <a href="postimage"> <button class="homeBtns">Post Image</button></a>
     </div>
+
     <div class="searchBox">
-      <form id="searchForm" role="search">
-        <input id="searchInput" type="search" id="query" name="here" placeholder="Search...">
-        <button class="searchButton"><svg class="svg" viewBox="0 0 1024 1024">
+      <form id="searchForm" method="GET" action="/posts/search"
+        enctype="application/x-www-form-urlencoded">
+        <input id="searchInput" type="search" id="query" name="searchTerm" placeholder="Search...">
+        <button type="submit" class="searchButton"><svg class="svg" viewBox="0 0 1024 1024">
             <path class="path1"
               d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z">
             </path>
           </svg></button>
       </form>
     </div>
+
   </div>
 </header>
 {{#if isLoggedIn}}
-  <script>
-    document.getElementById('logout-btn').addEventListener('click', function(ev) {
-      fetch('/users/logout', {method: "POST"})
-        .then(response => response.json())
-        .then(function(res_json){
-          console.log(res_json);
-          window.location.replace('/');
-        }).catch (err => {
-          console.log(err);
-        })
-    });
-  </script>
+<script>
+  document.getElementById('logout-btn').addEventListener('click', function (ev) {
+    fetch('/users/logout', { method: "POST" })
+      .then(response => response.json())
+      .then(function (res_json) {
+        console.log(res_json);
+        window.location.replace('/');
+      }).catch(err => {
+        console.log(err);
+      })
+  });
+</script>
 {{/if}}
