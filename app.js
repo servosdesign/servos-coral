@@ -1,16 +1,17 @@
-const createError = require("http-errors");
-const express = require("express");
+const createError = require('http-errors');
+const express = require('express');
 const favicon = require('serve-favicon');
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const handlebars = require("express-handlebars");
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const handlebars = require('express-handlebars');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const flash = require('express-flash');
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
-const postsRouter = require("./routes/posts");
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const postsRouter = require('./routes/posts');
+const commentsRouter = require('./routes/comments');
 
 const app = express();
 
@@ -30,6 +31,9 @@ app.engine(
           timeStyle: "long",
           dateStyle: "long"
         });
+      },
+      formateDateShort: function (dateString) {
+        return new Date(dateString).toLocaleString();
       }
     },
   })
@@ -73,6 +77,7 @@ app.use(function (req, res, next) {
 app.use("/", indexRouter); // route middleware from ./routes/index.js
 app.use("/users", usersRouter); // route middleware from ./routes/users.js
 app.use("/posts", postsRouter);
+app.use("/comments", commentsRouter);
 /**
  * Catch all route, if we get to here then the 
  * resource requested could not be found.

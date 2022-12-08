@@ -7,8 +7,43 @@
         <p class="author">{{currentPost.username}}</p>
         <p class="date-posted">{{formateDate currentPost.createdAt}}</p>
         <div class="commentBox">
-            <textarea cols="52" rows="1"></textarea>
-            <button class="homeBtns">Comment</button>
+            <textarea id="comment-text" cols="52" rows="1"></textarea>
+            <button class="homeBtns" id="commentButton" data-postid="{{currentPost.id}}">Comment</button>
         </div>
     </div>
 </div>
+<div class="viewPosts">
+    {{#each currentPost.comments}}
+    <div class="comment-box">
+        <p class="author">{{this.username}}</p>
+        <p class="post-description">{{this.text}}</p>
+        <p class="date-posted">{{formateDateShort this.createdAt}}</p>
+    </div>
+    {{/each}}
+</div>
+
+<script>
+    function addNewComment(data) {
+
+    }
+
+    document.getElementById('commentButton').addEventListener('click', function (ev) {
+        let commentTextElement = document.getElementById('comment-text');
+        let commentText = commentTextElement.value;
+        let postId = ev.currentTarget.dataset.postid;
+
+        fetch("/comments/create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "Application/json"
+            },
+            body: JSON.stringify({
+                comment: commentText,
+                postId: postId
+            })
+        }).then(response => response.json())
+            .then(res_json => {
+                console.log(res_json);
+            }).catch(err => console.log(err));
+    });
+</script>

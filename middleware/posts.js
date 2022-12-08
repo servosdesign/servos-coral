@@ -13,9 +13,8 @@ module.exports = {
 
   getPostById: function (req, res, next) {
     let postId = req.params.id;
-    // USE CSC317DB;
     let baseSQL = `
-    SELECT p.title, p.description, p.image,  p.createdAt, u.username
+    SELECT p.id, p.title, p.description, p.image,  p.createdAt, u.username
     FROM posts p
     JOIN users u
     ON p.fk_authorId=u.id
@@ -26,6 +25,20 @@ module.exports = {
           res.locals.currentPost = results[0];
         }
         next();
-      })
+      });
+  },
+
+  getCommentsForPostsById: function (req, res, next) {
+    let postId = req.params.id;
+    let baseSQL = `select c.id, c.text, c.createdAt, u.username
+    FROM comments c
+    JOIN users u
+    ON c.fk_authorid=u.id
+    WHERE fk_postId=12;`
+    db.execute(baseSQL, [postId])
+      .then(function ([results, fields]) {
+        res.locals.currentPost.comments = results;
+        next();
+      }).catch(err => next(err));
   }
 };
