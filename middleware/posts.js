@@ -34,7 +34,7 @@ module.exports = {
     FROM comments c
     JOIN users u
     ON c.fk_authorid=u.id
-    WHERE fk_postId=12;`
+    WHERE fk_postId=?;`
     db.execute(baseSQL, [postId])
       .then(function ([results, fields]) {
         res.locals.currentPost.comments = results;

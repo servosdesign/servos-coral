@@ -12,9 +12,9 @@
         </div>
     </div>
 </div>
-<div class="viewPosts">
+<div class="viewPosts" id="comment-list">
     {{#each currentPost.comments}}
-    <div class="comment-box">
+    <div class="comment-box" id="{{this.id}}">
         <p class="author">{{this.username}}</p>
         <p class="post-description">{{this.text}}</p>
         <p class="date-posted">{{formateDateShort this.createdAt}}</p>
@@ -24,13 +24,23 @@
 
 <script>
     function addNewComment(data) {
-
+        let commentList = document.getElementById('comment-list');
+        let newComent = document.createElement('template');
+        newComent.innerHTML = `<div class="comment-box" id="message-${data.commentId}">
+        <p class="author">${data.username}</p>
+        <p class="post-description">${data.comment}</p>
+        <p class="date-posted">${new Date().toLocaleString(data.createdAt)}</p>
+    </div>`;
+        commentList.append(newComent.content);
+        document.getElementById(`message-${data.commentId}`).scrollIntoView();
     }
 
     document.getElementById('commentButton').addEventListener('click', function (ev) {
         let commentTextElement = document.getElementById('comment-text');
         let commentText = commentTextElement.value;
         let postId = ev.currentTarget.dataset.postid;
+
+        if (!commentText) return;
 
         fetch("/comments/create", {
             method: "POST",
@@ -43,7 +53,7 @@
             })
         }).then(response => response.json())
             .then(res_json => {
-                console.log(res_json);
+                addNewComment(res_json.data);
             }).catch(err => console.log(err));
     });
 </script>
