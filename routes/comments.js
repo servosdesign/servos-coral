@@ -12,7 +12,7 @@ router.post('/create', function (req, res, next) {
     let { comment, postId } = req.body;
     let { userId, username } = req.session;
     db.execute(`INSERT INTO comments (text, fk_authorId, fk_postId)
-    value(?,?,?);`, [comment          , userId, postId])
+    value(?,?,?);`, [comment, userId, postId])
       .then(function ([results, fields]) {
         if (results && results.affectedRows === 1) {
           res.json({

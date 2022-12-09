@@ -11,20 +11,18 @@
       </div>
     </div>
     <div class="button-list">
+      <a href="/postimage"> <button class="homeBtns">Post</button></a>
       {{#if isLoggedIn}}
       <a id="logout-btn"><button class="homeBtns">Log Out</button></a>
       {{else}}
-      <a href="login"><button class="homeBtns">Log in</button></a>
+      <a href="/login"><button class="homeBtns">Log in</button></a>
       {{/if}}
 
-      <a href="registration"><button class="homeBtns">Sign up</button></a>
-      <a href="viewpost"><button class="homeBtns">View Post</button></a>
-      <a href="postimage"> <button class="homeBtns">Post Image</button></a>
+      <a href="/registration"><button class="homeBtns">Sign up</button></a>
     </div>
 
     <div class="searchBox">
-      <form id="searchForm" method="GET" action="/posts/search"
-        enctype="application/x-www-form-urlencoded">
+      <form id="searchForm" method="GET" action="/posts/search" enctype="application/x-www-form-urlencoded">
         <input id="searchInput" type="search" id="query" name="searchTerm" placeholder="Search...">
         <button type="submit" class="searchButton"><svg class="svg" viewBox="0 0 1024 1024">
             <path class="path1"

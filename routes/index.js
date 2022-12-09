@@ -25,8 +25,4 @@ router.get('/registration', function (req, res) {
   res.render('registration', { js: ["validation.js"] });
 });
 
-router.get('/viewpost', function (req, res) {
-  res.render('viewpost');
-});
-
 module.exports = router;
