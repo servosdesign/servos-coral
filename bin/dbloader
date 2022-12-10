@@ -15,17 +15,14 @@ function displayWarningMessage(warning) {
 async function getConnection() {
   return await mysql.createConnection({
     host: "localhost",
-    //TODO make sure to change to the user you want to use
-    user: "lars", //Your DB username
-    //TODO make sure to change to the correct password for your user.
-    password: "12345678l!", //Your DB password
+    user: "root", 
+    password: "12345678l!", 
   });
 }
 
 async function makeDatabase(connection) {
-  //TODO make sure to change yourdbnamehere
   const [result, _] = await connection.query(
-    "CREATE DATABASE IF NOT EXISTS csc317db;"
+    "CREATE DATABASE IF NOT EXISTS coral;"
   );
   if (result && result.warningStatus > 0) {
     const [warningResult, _] = await connection.query("SHOW WARNINGS");
@@ -37,9 +34,9 @@ async function makeDatabase(connection) {
 
 async function makeUsersTable(connection) {
   const [result, _] = await connection.query(
-    // Users Table SQL Goes here
+    // Users 
     `
-    CREATE TABLE IF NOT EXISTS csc317db.users (
+    CREATE TABLE IF NOT EXISTS coral.users (
       id INT NOT NULL AUTO_INCREMENT,
       username VARCHAR(64) NOT NULL,
       email VARCHAR(128) NOT NULL,
@@ -63,9 +60,9 @@ async function makeUsersTable(connection) {
 
 async function makePostsTable(connection) {
   const [result, _] = await connection.query(
-    // Posts Table SQL Goes here
+    // Posts
     `
-    CREATE TABLE IF NOT EXISTS csc317db.posts (
+    CREATE TABLE IF NOT EXISTS coral.posts (
       id INT NOT NULL AUTO_INCREMENT,
       title VARCHAR(128) NOT NULL,
       description TEXT NOT NULL,
@@ -78,7 +75,7 @@ async function makePostsTable(connection) {
       INDEX postauthor_idx (fk_authorId ASC) VISIBLE,
       CONSTRAINT postauthor
         FOREIGN KEY (fk_authorId)
-        REFERENCES csc317db.users (id)
+        REFERENCES coral.users (id)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION)
     ENGINE = InnoDB
@@ -94,9 +91,9 @@ async function makePostsTable(connection) {
 
 async function makeCommentsTable(connection) {
   const [result, _] = await connection.query(
-    // Comments Table SQL Goes here
+    // Comments 
     ` 
-    CREATE TABLE IF NOT EXISTS csc317db.comments (
+    CREATE TABLE IF NOT EXISTS coral.comments (
       id INT NOT NULL AUTO_INCREMENT,
       text TEXT NOT NULL,
       fk_authorId INT NOT NULL,
@@ -107,12 +104,12 @@ async function makeCommentsTable(connection) {
       INDEX commentpost_idx (fk_postId ASC) VISIBLE,
       CONSTRAINT commentauthor
         FOREIGN KEY (fk_authorId)
-        REFERENCES csc317db.users (id)
+        REFERENCES coral.users (id)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION,
       CONSTRAINT commentpost
         FOREIGN KEY (fk_postId)
-        REFERENCES csc317db.posts (id)
+        REFERENCES coral.posts (id)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION)
     ENGINE = InnoDB
@@ -130,12 +127,11 @@ async function makeCommentsTable(connection) {
   let connection = null;
   try {
     connection = await getConnection();
-    await makeDatabase(connection); // make DB
-    //TODO make sure to change yourdbnamehere
-    await connection.query("USE csc317db"); // set new DB to the current DB
-    await makeUsersTable(connection); // try to make user table
-    await makePostsTable(connection); // try to make posts table
-    await makeCommentsTable(connection); // try to make comments table
+    await makeDatabase(connection); 
+    await connection.query("USE coral");
+    await makeUsersTable(connection); 
+    await makePostsTable(connection); 
+    await makeCommentsTable(connection); 
     connection.close();
     return;
   } catch (error) {

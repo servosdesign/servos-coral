@@ -48,7 +48,7 @@ var sessionStore = new MySQLStore({}, require('./conf/database'));
 app.use(
   session({
     key: "csid",
-    secret: "csc317 secrect",
+    secret: "coral secrect",
     store: sessionStore,
     resave: false,
     saveUninitialized: false
@@ -58,7 +58,7 @@ app.use(
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser("csc317 secrect"));
+app.use(cookieParser("coral secrect"));
 
 app.use(flash());
 

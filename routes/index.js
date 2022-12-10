@@ -6,7 +6,7 @@ const { getRecentPosts, getPostById, getCommentsForPostsById } = require('../mid
 
 /* GET home page. */
 router.get('/', getRecentPosts, function (req, res, next) {
-  res.render('index', { title: 'CSC 317 App', name: "Lars Severson" });
+  res.render('index');
 });
 
 router.get('/login', function (req, res) {
