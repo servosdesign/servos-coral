@@ -1,4 +1,3 @@
-
 class UserError extends Error {
     constructor(message, redirectURL, status){
         super(message);
