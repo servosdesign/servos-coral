@@ -1,4 +1,4 @@
-#### JavaScript imgur clone application with a stack composed of NodeJS, ExpressJS, MySQL, and Handlebars, which allows users to create accounts, posts images, comment on images, and search for images
+### JavaScript imgur clone application with a stack composed of NodeJS, ExpressJS, MySQL, and Handlebars, which allows users to create accounts, posts images, comment on images, and search for images
 
 
 
