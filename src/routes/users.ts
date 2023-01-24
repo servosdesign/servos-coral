@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt');
-const db = require('../conf/database');
-const userError = require('../helpers/error/UserError');
-const UserError = require('../helpers/error/UserError');
+const db = require('../conf/database.ts');
+const userError = require('../helpers/error/UserError.ts');
+const UserError = require('../helpers/error/UserError.ts');
 
 router.post("/register", function (req, res, next) {
   const { username, email, password } = req.body;

@@ -3,7 +3,7 @@ const multer = require('multer');
 const sharp = require('sharp');
 const router = express.Router();
 
-const db = require('../conf/database');
+const db = require('../conf/database.ts');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

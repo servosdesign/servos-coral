@@ -8,10 +8,10 @@ const handlebars = require('express-handlebars');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const flash = require('express-flash');
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const postsRouter = require('./routes/posts');
-const commentsRouter = require('./routes/comments');
+const indexRouter = require('./src/routes/index.ts');
+const usersRouter = require('./src/routes/users.ts');
+const postsRouter = require('./src/routes/posts.ts');
+const commentsRouter = require('./src/routes/comments.ts');
 
 const app = express();
 
@@ -43,7 +43,7 @@ app.engine(
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
-var sessionStore = new MySQLStore({}, require('./conf/database'));
+var sessionStore = new MySQLStore({}, require('./src/conf/database.ts'));
 
 app.use(
   session({

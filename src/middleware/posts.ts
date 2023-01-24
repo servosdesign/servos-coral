@@ -1,4 +1,4 @@
-const db = require('../conf/database');
+const db = require('../conf/database.ts');
 
 module.exports = {
   getRecentPosts: function (req, res, next) {

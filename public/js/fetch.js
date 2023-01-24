@@ -1,71 +1,46 @@
-const api = "https://jsonplaceholder.typicode.com/albums/2/photos";
-
+var api = "https://jsonplaceholder.typicode.com/albums/2/photos";
 var fadeTime = 1000;
 var count = 0;
-const increment = "increment";
-const decrement = "decrement";
-
+var increment = "increment";
+var decrement = "decrement";
 var counterDisplay = document.getElementById("counter");
-
-const fetchApi = () => {
-  fetch(api)
-    .then(response => response.json())
-    .then(data => {
-      showData(data);
+var fetchApi = function () {
+    fetch(api)
+        .then(function (response) { return response.json(); })
+        .then(function (data) {
+        showData(data);
     });
-}
-
-const showData = (data) => {
-  let imageContainer = `<div></div>`
-
-  data.forEach(element => {
-    countTotalImages(increment, "");
-    imageContainer +=
-      `<div class="hovering" onclick="deleteImage(this)">
-      <img src=${element.url}></img>
-        <h2>${element.title} </h2>  
-    </div>`;
-
-  });
-  document.getElementById("imageContent").innerHTML = imageContainer;
-}
-
-const countTotalImages = (increment, decrement) => {
-  if (increment) {
-    count++;
-  }
-  if (decrement) {
-    count--;
-  }
-  counterDisplay.innerHTML = "Total Posts: " + count;
-}
-
-const deleteImage = (e) => {
-  fadeOut(e);
-
-  setTimeout(() => {
-    e.remove();
-    countTotalImages("", decrement);
-  }, fadeTime);
 };
-
-const fadeOut = (id) => {
-  id.animate(
-    [
-      { opacity: 1 },
-      { opacity: .1 },
+var showData = function (data) {
+    var imageContainer = "<div></div>";
+    data.forEach(function (element) {
+        countTotalImages(increment, "");
+        imageContainer +=
+            "<div class=\"hovering\" onclick=\"deleteImage(this)\">\n      <img src=".concat(element.url, "></img>\n        <h2>").concat(element.title, " </h2>  \n    </div>");
+    });
+    document.getElementById("imageContent").innerHTML = imageContainer;
+};
+var countTotalImages = function (increment, decrement) {
+    if (increment) {
+        count++;
+    }
+    if (decrement) {
+        count--;
+    }
+    counterDisplay.innerHTML = "Total Posts: " + count;
+};
+var deleteImage = function (e) {
+    fadeOut(e);
+    setTimeout(function () {
+        e.remove();
+        countTotalImages("", decrement);
+    }, fadeTime);
+};
+var fadeOut = function (id) {
+    id.animate([
+        { opacity: 1 },
+        { opacity: .1 },
     ], {
-    duration: fadeTime,
-  },
-  )
-}
-
-
-
-
-
-
-
-
-
-
+        duration: fadeTime
+    });
+};
