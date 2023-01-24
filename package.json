@@ -1,6 +1,7 @@
 {
   "name": "application",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
     "builddb": "node ./bin/dbloader",
@@ -24,9 +25,6 @@
     "sharp": "^0.31.2"
   },
   "devDependencies": {
-    "@types/express": "^4.17.16",
-    "@types/node": "^18.11.18",
-    "nodemon": "^2.0.9",
-    "typescript": "^4.9.4"
+    "nodemon": "^2.0.9"
   }
 }

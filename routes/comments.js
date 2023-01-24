@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../conf/database.ts');
+const db = require('../conf/database');
 
 router.post('/create', function (req, res, next) {
   if (!req.session.userId) {

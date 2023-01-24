@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-const { isLoggedIn } = require('../middleware/protectors.ts');
-const { getRecentPosts, getPostById, getCommentsForPostsById } = require('../middleware/posts.ts');
+const { isLoggedIn } = require('../middleware/protectors');
+const { getRecentPosts, getPostById, getCommentsForPostsById } = require('../middleware/posts');
 
 /* GET home page. */
 router.get('/', getRecentPosts, function (req, res, next) {
